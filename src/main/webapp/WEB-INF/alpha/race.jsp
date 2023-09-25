@@ -27,6 +27,11 @@
 	#startBtn{
 		padding: 5px 20px;
 	}
+	
+/* 	section > table{ */
+/* 		float: left; */
+/* 		margin: 10px; */
+/* 	} */
 </style>
 
 <script type="text/javascript">
@@ -44,7 +49,27 @@ function race(alpha){
 	td.style.color=alpha.fg;
 	td.style.background=alpha.bg;
 	td.innerText=alpha.ch;
-
+	
+	let tr = document.createElement('tr');
+	let tdNo = document.createElement('td');
+	let tdAlpha = document.createElement('td');
+	let tdCount = document.createElement('td');
+	
+	tr.append(tdNo);
+	tr.append(tdAlpha);
+	tr.append(tdCount);
+	stat.tBodies[0].append(tr);
+	
+	tdNo.align = 'rignt';
+	tdAlpha.align = 'right';
+	tdCount.align = 'right';
+	
+	tdNo.innerText = tr.parentElement.rows.length-1;
+	tdAlpha.innerText = alpha.ch;
+	tdAlpha.style.color = alpha.fg;
+	tdAlpha.style.background = alpha.bg;
+	tdCount.innerText=0;
+	
 	setTimeout(function move() {
 	
 			let td = surface.rows[alpha.line-1].cells[alpha.column-1];
@@ -76,6 +101,7 @@ function race(alpha){
 				if(alpha.column==1&&alpha.line==1){
 					direction = 0;
 					roundCount.innerText = ++roundCount.innerText;
+					tdCount.innerText = ++tdCount.innerText;
 				}
 				break;
 			}
@@ -153,6 +179,21 @@ window.onload=function(){
 		</tr>
 	</tbody>
 </table>
+<hr>
+
+<section>
+<table id="stat" width="400" border="1">
+	<thead>
+		<tr>
+			<th>no</th><th>alpha</th><th>Round Count</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+		</tr>
+	</tbody>
+</table>
+<hr>
 
 <table id="surface">
 	<tbody>
@@ -165,6 +206,7 @@ window.onload=function(){
 			</tr>
 		</c:forEach>
 	</tbody>
+</section>
 </table>
 </body>
 </html>

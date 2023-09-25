@@ -1,6 +1,8 @@
 package com.example.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +24,8 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/alpha")
 @Slf4j
 public class AjaxController {
+	
+	
 	@GetMapping("/fill")
 	void fill(Model model) {
 		log.info("fill()...");
@@ -39,6 +43,8 @@ public class AjaxController {
 	}
 
 	
+	
+	
 	@GetMapping("/race")
 	void race(Model model) {
 		var alphas = new ArrayList<ArrayList<Alpha>>();
@@ -53,10 +59,43 @@ public class AjaxController {
 	}
 
 	
+	
 	@GetMapping("/data")
 	@ResponseBody	// REST API
 	Alpha data() {
 		return new Alpha();
 	}
+	
+	
+	
+	@GetMapping("/cross")
+	void cross (Model model) {
+		var alphas = new HashMap<Integer, ArrayList<Alpha>>();
+		
+		for(var i = 0; i<20; i++) {
+			alphas.put(i, new ArrayList<Alpha>());
+			for (var j=0; j<40; j++) {
+				alphas.get(i).add(new Alpha());
+			}
+		}
+		model.addAttribute("surface", alphas);
+	}
+
+	
+	@GetMapping("/zigzag")
+	void zigzag(Model model){
+		var alphas = new HashSet<ArrayList<Alpha>>();
+		
+		for(var i = 0; i<20; i++) {
+			var list = new ArrayList<Alpha>();
+			for (var j=0; j<40; j++) {
+				list.add(new Alpha());
+			}
+			alphas.add(list);
+		}
+		model.addAttribute("surface", alphas);
+		
+	}
+
 
 }
