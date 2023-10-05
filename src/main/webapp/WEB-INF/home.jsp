@@ -38,17 +38,19 @@ li:hover {
 	height: 100vh;
 }*/
 </style>
+
+
 <script type="text/javascript">
-window.onload=function(){
-	setInterval(resize, 100)
-}
+// iframe 크기 조절을 위한 자바스크립트문
+	window.onload=function(){
+		setInterval(resize, 100)
+	}
 
 	function resize(){
 		let iframe = document.querySelector('iframe');
 		console.log(iframe);
 		iframe.style.height=getComputedStyle(iframe.contentDocument.documentElement).height;
 	}
-	
 </script>
 </head>
 <body>
